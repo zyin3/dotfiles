@@ -23,7 +23,8 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.zyyin = import ./home.nix;
+          home-manager.users.bytedance = import ./home.nix;
+	  home-manager.backupFileExtension = "backup";
         }
       ];
     };
