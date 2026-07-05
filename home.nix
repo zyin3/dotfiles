@@ -5,8 +5,8 @@ let
 in
 
 {
-  home.username = "kunchen";
-  home.homeDirectory = "/Users/kunchen";
+  home.username = "bytedance";
+  home.homeDirectory = "/Users/bytedance";
   home.stateVersion = "24.11";
   home.packages = with pkgs; [
     # cli i use constantly
@@ -16,6 +16,7 @@ in
     jq        # json on the command line
     lazygit
     neovim
+    emacs
     # the font everything renders in
     nerd-fonts.hack
   ];
@@ -41,22 +42,22 @@ in
   };
 
   programs.git.settings.user = {
-    name = "kunchenguid";
-    email = "kun@kunchenguid.com";
+    name = "Zhiyuan Yin";
+    email = "zhiyuan.yin@bytedance.com";
   };
 
-  programs.starship = {
-    enable = true;
-    settings = {
-      add_newline = false;
-      format = "$directory$git_branch$git_status$cmd_duration$line_break$character";
-      character = {
-        success_symbol = "[❯](purple)";
-        error_symbol = "[❯](red)";
-      };
-      cmd_duration.format = "[$duration]($style) ";
-    };
-  };
+  # programs.starship = {
+  #   enable = true;
+  #   settings = {
+  #     add_newline = false;
+  #     format = "$directory$git_branch$git_status$cmd_duration$line_break$character";
+  #     character = {
+  #       success_symbol = "[❯](purple)";
+  #       error_symbol = "[❯](red)";
+  #     };
+  #     cmd_duration.format = "[$duration]($style) ";
+  #   };
+  # };
 
   # Edit-in-place: the real file stays in my repo, ~/.config just points at it.
   home.file.".config/wezterm".source =
