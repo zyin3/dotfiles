@@ -17,6 +17,10 @@ in
     lazygit
     neovim
     emacs
+    # language toolchains
+    go_1_25   # go compiler + tooling (pinned to 1.25)
+    python3   # python interpreter
+    python3Packages.ipython  # enhanced python repl
     # the font everything renders in
     nerd-fonts.hack
   ];
@@ -25,6 +29,7 @@ in
 
   programs.zsh = {
     enable = true;
+    enableCompletion = true;           # tab completion (compinit)
     autosuggestion.enable = true;      # ghost text from history
     syntaxHighlighting.enable = true;  # commands turn green when valid
     initContent = ''
