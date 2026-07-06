@@ -9,7 +9,7 @@ config.font = wezterm.font_with_fallback({
 	"Hack Nerd Font",
 	"Hiragino Sans GB",
 })
-config.font_size = 15.0
+config.font_size = 14.0
 config.window_background_opacity = 0.8
 config.macos_window_background_blur = 50
 config.hide_tab_bar_if_only_one_tab = true
