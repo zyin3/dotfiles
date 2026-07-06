@@ -24,8 +24,9 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.bytedance = import ./home.nix;
-	  home-manager.backupFileExtension = "backup";
+          home-manager.backupFileExtension = "backup";
         }
       ];
     };
+  };
 }
