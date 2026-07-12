@@ -1,3 +1,4 @@
+onboarding = false
 [keys]
 prefix = "ctrl+b"
 focus_pane_left  = "prefix+h"
@@ -11,6 +12,10 @@ close_tab = "prefix+ampersand"
 workspace_picker = "prefix+w"
 goto             = "prefix+g"
 copy_mode  = "prefix+y"  # herdr's copy-mode entry key; copy-mode's own internal keys (v/space select, y/Enter copy, q/Esc cancel) aren't configurable
+# Don't let herdr grab ctrl+v: its image-paste handler only delivers to a --remote
+# server, so locally it swallows the keystroke and Claude Code never sees it.
+# Empty = pass ctrl+v through to the pane, where Claude Code reads the clipboard itself.
+remote_image_paste = ""
 
 [theme]
 name = "gruvbox"
