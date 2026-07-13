@@ -80,4 +80,23 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/AGENTS.md";
   home.file.".config/opencode/AGENTS.md".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/AGENTS.md";
+  home.file.".local/bin/dotfiles-sync-fork.sh".source =
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.local/bin/dotfiles-sync-fork.sh";
+
+  # Weekly: rebase local main onto origin/main and push to the fork.
+  # Aborts + notifies on conflict instead of force-pushing a broken tree.
+  launchd.agents.dotfiles-sync-fork = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "/bin/bash"
+        "${config.home.homeDirectory}/.local/bin/dotfiles-sync-fork.sh"
+      ];
+      StartCalendarInterval = [
+        { Weekday = 0; Hour = 16; Minute = 0; }  # Sunday 16:00 local
+      ];
+      StandardOutPath = "${config.home.homeDirectory}/Library/Logs/dotfiles-sync-fork.log";
+      StandardErrorPath = "${config.home.homeDirectory}/Library/Logs/dotfiles-sync-fork.log";
+    };
+  };
 }
