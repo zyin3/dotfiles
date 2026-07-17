@@ -15,4 +15,13 @@ config.macos_window_background_blur = 50
 config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "RESIZE"
 
+config.keys = {
+	-- Opt+B: send Meta-b (ESC b) so shells/Claude Code move back one word.
+	{ key = "b", mods = "OPT", action = wezterm.action.SendString("\x1bb") },
+	-- Opt+F: send Meta-f (ESC f) to move forward one word.
+	{ key = "f", mods = "OPT", action = wezterm.action.SendString("\x1bf") },
+	-- Opt+D: send Meta-d (ESC d) to delete the word ahead of the cursor.
+	{ key = "d", mods = "OPT", action = wezterm.action.SendString("\x1bd") },
+}
+
 return config
