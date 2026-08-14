@@ -49,13 +49,18 @@ wezterm.on("window-focus-changed", function(window)
 	window:set_config_overrides(overrides)
 end)
 
+-- Make Option a Meta key: Opt+<key> sends ESC+<key> instead of composing a
+-- special character. This gives all readline word bindings (Opt+B/F back/forward
+-- a word, Opt+D delete-word, etc.) for free in shells and Claude Code.
+config.send_composed_key_when_left_alt_is_pressed = false
+config.send_composed_key_when_right_alt_is_pressed = false
+
 config.keys = {
-	-- Opt+B: send Meta-b (ESC b) so shells/Claude Code move back one word.
-	{ key = "b", mods = "OPT", action = wezterm.action.SendString("\x1bb") },
-	-- Opt+F: send Meta-f (ESC f) to move forward one word.
-	{ key = "f", mods = "OPT", action = wezterm.action.SendString("\x1bf") },
-	-- Opt+D: send Meta-d (ESC d) to delete the word ahead of the cursor.
-	{ key = "d", mods = "OPT", action = wezterm.action.SendString("\x1bd") },
+	-- Opt+Enter: send Meta-Enter (ESC + CR) to the pane instead of WezTerm's
+	-- default ToggleFullScreen, so apps like Claude Code get a newline signal.
+	{ key = "Enter", mods = "OPT", action = wezterm.action.SendString("\x1b\r") },
+	-- Cmd+Enter: toggle fullscreen (replaces the default Opt+Enter binding above).
+	{ key = "Enter", mods = "CMD", action = wezterm.action.ToggleFullScreen },
 }
 
 return config
