@@ -37,6 +37,7 @@
     onActivation.extraFlags = [ "--force" ];
     brews = [
       "herdr"
+      "hunk"  # hunkdiff - review-first terminal diff viewer
     ];
     casks = [
       "wezterm"
