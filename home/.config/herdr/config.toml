@@ -1,6 +1,6 @@
 onboarding = false
 [keys]
-prefix = "ctrl+b"
+prefix = "ctrl+t"
 focus_pane_left  = "prefix+h"
 focus_pane_down  = "prefix+j"
 focus_pane_up    = "prefix+k"
@@ -22,5 +22,5 @@ name = "gruvbox"
 auto_switch = false
 
 [ui]
-# Agents panel order: explicit choice of "spaces" (grouped by space, the default) over "priority".
-agent_panel_sort = "spaces"
+# Agents panel order: explicit choice of "priority" over "spaces" (grouped by space, the default).
+agent_panel_sort = "priority"
