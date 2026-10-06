@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
@@ -17,7 +17,7 @@ in
     yazi      # terminal file manager
     lazygit
     neovim
-    emacs
+    emacs-macport  # macOS-native Emacs (Yamamoto mac port): smooth scroll, native fullscreen
     # language toolchains
     go_1_25   # go compiler + tooling (pinned to 1.25)
     python3   # python interpreter
@@ -93,6 +93,22 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/AGENTS.md";
   home.file.".local/bin/dotfiles-sync-fork.sh".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.local/bin/dotfiles-sync-fork.sh";
+
+  # Spotlight refuses to index apps that are symlinks into /nix/store, so the
+  # symlink home-manager drops in "~/Applications/Home Manager Apps" is invisible
+  # to Spotlight and the Dock. Create a real macOS alias in ~/Applications (an
+  # indexed location) instead: Spotlight then finds Emacs, and launching it via
+  # Spotlight/Dock goes through LaunchServices so the app activates and takes
+  # keyboard focus (a bare `emacs` from the terminal does not).
+  home.activation.aliasEmacsForSpotlight =
+    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      app="${pkgs.emacs-macport}/Applications/Emacs.app"
+      dest="$HOME/Applications/Emacs.app"
+      if [ -e "$app" ]; then
+        run rm -rf "$dest"
+        run ${pkgs.mkalias}/bin/mkalias "$app" "$dest"
+      fi
+    '';
 
   # Weekly: rebase local main onto origin/main and push to the fork.
   # Aborts + notifies on conflict instead of force-pushing a broken tree.
